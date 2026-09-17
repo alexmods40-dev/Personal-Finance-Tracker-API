@@ -32,7 +32,7 @@ A RESTful API for personal expense tracking built with TypeScript, Express, and 
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/alexmods40-dev/finance-tracker-api.git
+   git clone https://github.com/alexmods40-dev/Personal-Finance-Tracker-API.git
    cd finance-tracker-api
    ```
 
