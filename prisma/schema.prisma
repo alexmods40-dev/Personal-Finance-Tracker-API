@@ -1,0 +1,91 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../prisma/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+
+
+model User {
+ id	Int	@id	@default(autoincrement())
+ username	String	@unique
+ password	String
+ role	Role	@default(USER)
+ transactions	Transaction[]
+ categories Category[]
+ refresh_token  String?
+}
+
+enum Role {
+ USER
+ ADMIN
+}
+
+model Transaction {
+ id	Int	@id	@default(autoincrement())
+ user   User     @relation(fields: [userId], references: [id])
+ userId Int
+ sum	Int
+ type	Type
+ category	CategoryList
+ description	String?
+ date	DateTime
+ createdAt DateTime @default(now())
+}
+
+enum Type {
+ INCOME
+ EXPENSE
+}
+
+model Category {
+ id	Int	@id	@default(autoincrement())
+ user   User     @relation(fields: [userId], references: [id])
+ userId Int
+ name	CategoryList
+ monthLimit	Int
+ @@unique([userId, name])
+}
+
+enum CategoryList {
+ Groceries
+ Dining
+ Coffee
+ Alcohol
+
+ Fuel
+ Public_Transport
+ Taxi
+ Auto_Maintenance
+ Parking
+ Car_Wash
+ Car_Sharing
+ 
+ Rent
+ Utilities
+ Home_Supplies
+ Internet
+
+ Entertainment
+ Travel
+ Subscriptions
+ Hobbies
+
+ Pharmacy
+ Medical
+ Gym
+ Self_Care
+
+ Clothing
+ Electronics
+ Gifts
+
+ Salary
+ Freelance
+ Investments
+ Gifts_Received
+}
