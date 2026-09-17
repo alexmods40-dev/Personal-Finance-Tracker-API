@@ -41,16 +41,3 @@ app.use('/stats', stats);
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
 });
-
-
-function counter() {
-	let count = 0;
-	return function() {
-		return ++count;
-	}
-}
-
-const a = counter();
-
-console.log(a())
-console.log(a())
